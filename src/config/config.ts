@@ -2,16 +2,18 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+/** 4 variables for mysql connection */
 const MYSQL_HOST = process.env.MYSQL_HOST || 'localhost';
-const MYSQL_DATABASE = process.env.MYSQL_DATABASE || 'supercooldb';
-const MYSQL_USER = process.env.MYSQL_HOST || 'superuser';
-const MYSQL_PASS = process.env.MYSQL_HOST || 'roseville';
+const MYSQL_DATABASE = process.env.MYSQL_DATABASE || 'movies';
+const MYSQL_USER = process.env.MYSQL_HOST || 'root';
+const MYSQL_PASS = process.env.MYSQL_HOST || 'password';
 
+/** mysql connection object */
 const MYSQL = {
     host: MYSQL_HOST,
     database: MYSQL_DATABASE,
-    user: MYSQL_USER,
-    pass: MYSQL_PASS
+    username: MYSQL_USER,
+    password: MYSQL_PASS
 };
 
 const SERVER_HOSTNAME = process.env.SERVER_HOSTNAME || 'localhost';

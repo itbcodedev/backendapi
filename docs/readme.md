@@ -59,3 +59,73 @@ curl --request GET 'localhost:1337/sample/ping'
 
 curl --request POST 'localhost:3000/users' \
 --data-raw ''
+
+# mysql2
+
+$ npm install mysql2 
+$ npm install --save-dev @types/mysql2
+
+
+import * as mysql from 'mysql2/promise';
+const mysql = require("mysql2/promise");
+
+console.log("Creating connection pool...")
+const pool = mysql.createPool({
+    host: 'localhost',
+    user: 'user',
+    database: 'test_db',
+    password: 'password'
+})
+
+module.exports = pool;
+
+
+test.js
+// Require to whereever db-config is 
+const pool = require('./db-config.js');
+
+async function testQuery() {
+    const results = await pool.query("select * from users");
+    console.table(results[0]);
+}
+
+testQuery();
+
+# async
+
+In JavaScript, you have three options to write asynchronous code:
+Using callbacks:
+
+db.query( 'SELECT * FROM users WHERE id = 1', ( err, rows ) => {
+  // ... use the result ...
+} );
+
+2. Using promises:
+
+db.query( 'SELECT * FROM users WHERE id = 1' ).then( rows => {
+  // ... use the result ...
+} );
+
+3. Using the await keyword:
+
+const rows = await db.query( 'SELECT * FROM users WHERE id = 1' );
+
+# async example
+
+const users = await db.query( 'SELECT * FROM users WHERE id = 1' );
+for ( const i in users ) {
+  users[ i ].groups = await db.query( '...' );
+  if ( users[ i ].is_admin )
+    users[ i ].modules = await db.query( '...' );
+}
+
+const db = makeDb( config );
+try {
+  const someRows = await db.query( 'SELECT * FROM some_table' );
+  const otherRows = await db.query( 'SELECT * FROM other_table' );
+  // do something with someRows and otherRows
+} catch ( err ) {
+  // handle the error
+} finally {
+  await db.close();
+}

@@ -7,6 +7,7 @@ import config from './config/config';
 /** Router */
 
 import SampleRoute from './routes/sample';
+import BookRoute from './routes/book';
 
 const NAMESPACE = 'Server';
 const app: Application = express();
@@ -45,6 +46,7 @@ app.use((req, res, next) => {
 /** Routes go here */
 
 app.use('/sample', SampleRoute);
+app.use('/books', BookRoute);
 
 /** Error handling */
 app.use((req, res, next) => {
